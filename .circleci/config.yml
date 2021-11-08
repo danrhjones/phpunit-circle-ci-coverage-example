@@ -68,5 +68,6 @@ jobs:
           path: coverage/phpunit
       - coveralls/upload:
           path_to_lcov: coverage/phpunit/clover.xml
+          verbose: true
   #          parallel_finished: true
 
