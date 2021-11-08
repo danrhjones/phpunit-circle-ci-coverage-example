@@ -6,9 +6,9 @@ orbs:
 workflows:
   test:
     jobs:
-      - unit-tests:
+      - unit-tests
       - upload-coveralls-report:
-          requires: [ unit-tests ]
+          requires: [ unit-tests]
 
 jobs:
   upload-coveralls-report:
