@@ -67,7 +67,7 @@ jobs:
       - store_artifacts:
           path: coverage/phpunit
       - coveralls/upload:
-          path_to_lcov: coverage/phpunit/clover.xml
+          path_to_lcov: ./coverage/phpunit/clover.xml
           verbose: true
   #          parallel_finished: true
 
