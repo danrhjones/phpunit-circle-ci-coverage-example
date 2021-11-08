@@ -27,6 +27,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Install Node.js"
+          command: |
+            curl -sSL "https://nodejs.org/dist/v10.21.0/node-v10.21.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v10.21.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo npm_install=6.14.11 sh
+      - run:
           name: Setup environment variables
           command: |
             echo "export PATH=$HOME/.composer/vendor/bin:$PATH" >> $BASH_ENV
@@ -62,4 +67,5 @@ jobs:
           path: coverage/phpunit
       - coveralls/upload:
           path_to_lcov: coverage/phpunit/clover.xml
+  #          parallel_finished: true
 
