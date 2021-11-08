@@ -7,11 +7,8 @@ workflows:
   test:
     jobs:
       - unit-tests:
-          filters:
-            branches:
-              ignore: /^.*-built$/
-#      - upload-coveralls-report:
-#          requires: [ unit-tests, jest ]
+      - upload-coveralls-report:
+          requires: [ unit-tests ]
 
 jobs:
   upload-coveralls-report:
