@@ -29,7 +29,9 @@ jobs:
       - run:
           name: "Install Node.js"
           command: |
-              sudo npm install -g npm@latest
+            curl -sSL "https://nodejs.org/dist/latest/node-v17.0.1-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v17.0.1-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo npm_install8.1.1
+
       - run:
           name: Setup environment variables
           command: |
