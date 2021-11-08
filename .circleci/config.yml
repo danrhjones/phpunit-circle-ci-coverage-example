@@ -24,15 +24,8 @@ jobs:
   unit-tests:
     docker:
       - image: circleci/php:7.4-browsers
-      - image: circleci/mysql:5.7.32
-
     steps:
       - checkout
-      - run:
-          name: "Install Node.js"
-          command: |
-            curl -sSL "https://nodejs.org/dist/v10.21.0/node-v10.21.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v10.21.0-linux-x64/bin/node
-            curl https://www.npmjs.com/install.sh | sudo npm_install=6.14.11 sh
       - run:
           name: Setup environment variables
           command: |
@@ -69,5 +62,4 @@ jobs:
           path: coverage/phpunit
       - coveralls/upload:
           path_to_lcov: coverage/phpunit/clover.xml
-  #          parallel_finished: true
 
