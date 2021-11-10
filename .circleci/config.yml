@@ -55,5 +55,5 @@ jobs:
           path: coverage/phpunit
       - run:
           name: upload to coveralls
-          command: vendor/bin/php-coveralls  --exclude-no-stmt
+          command: vendor/bin/php-coveralls -v  --exclude-no-stmt
 
