@@ -10,19 +10,23 @@ workflows:
 
 jobs:
   done:
-    machine:
-      image: ubuntu-1604:202007-01
-    environment:
-      COVERALLS_PARALLEL: true
+    docker:
+      - image: circleci/php:7.4-browsers
     steps:
+      - checkout
+      - run:
+          name: Install composer dependencies
+          command: composer install -o -n
       - run:
           name: upload to coveralls
-          command: |
-              curl -k "https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN" -d "payload[build_num]=$CIRCLE_WORKFLOW_ID&payload[status]=done"
+          command: vendor/bin/php-coveralls -v  --exclude-no-stmt
+
 
   jest:
     machine:
       image: ubuntu-1604:202007-01
+    environment:
+      COVERALLS_PARALLEL: true
     steps:
       - checkout
       - restore_cache:
@@ -45,6 +49,8 @@ jobs:
   php-tests:
     docker:
       - image: circleci/php:7.4-browsers
+    environment:
+      COVERALLS_PARALLEL: true
     steps:
       - checkout
       - run:
@@ -88,7 +94,4 @@ jobs:
           destination: test-results
       - store_artifacts:
           path: coverage/phpunit
-#      - run:
-#          name: upload to coveralls
-#          command: vendor/bin/php-coveralls -v  --exclude-no-stmt
 
