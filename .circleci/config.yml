@@ -55,8 +55,7 @@ jobs:
       - run:
           name: Running PHP Unit
           command: |
-#            @putenv XDEBUG_MODE=coverage
-            ./vendor/bin/phpunit  --color=always --coverage-clover coverage/phpunit/clover.xml
+              ./vendor/bin/phpunit  --color=always --coverage-clover coverage/phpunit/clover.xml
       - store_test_results:
           path: /tmp/test-results/phpunit/
       - store_artifacts:
