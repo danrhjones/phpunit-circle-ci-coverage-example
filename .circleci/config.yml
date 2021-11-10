@@ -1,22 +1,12 @@
 version: 2.1
 
-orbs:
-  coveralls: coveralls/coveralls@1.0.6
-
 workflows:
   test:
     jobs:
       - unit-tests
-      - upload-coveralls-report:
-          requires: [ unit-tests]
+
 
 jobs:
-  upload-coveralls-report:
-    docker:
-      - image: 'circleci/node:10.0.0'
-    steps:
-      - coveralls/upload
-
   unit-tests:
     docker:
       - image: circleci/php:7.4-browsers
@@ -52,10 +42,10 @@ jobs:
           paths:
             - ~/.cache
             - ~/.composer/cache
-#      - run:
-#          name: Running PHP Unit
-#          command: |
-#              phpdbg -qrr vendor/bin/phpunit --coverage-clover ./coverage/phpunit/clover.xml
+      - run:
+          name: Running PHP Unit
+          command: |
+           composer test:coverage
       - store_test_results:
           path: /tmp/test-results/phpunit/
       - store_artifacts:
@@ -63,8 +53,7 @@ jobs:
           destination: test-results
       - store_artifacts:
           path: coverage/phpunit
-      - coveralls/upload:
-          path_to_lcov: ./coverage/phpunit/clover.xml
-          verbose: true
-  #          parallel_finished: true
+      - run:
+          name: upload to coveralls
+          command: vendor/bin/php-coveralls  --exclude-no-stmt
 
