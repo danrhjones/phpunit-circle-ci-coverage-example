@@ -52,10 +52,10 @@ jobs:
           paths:
             - ~/.cache
             - ~/.composer/cache
-      - run:
-          name: Running PHP Unit
-          command: |
-              phpdbg -qrr vendor/bin/phpunit --coverage-clover ./coverage/phpunit/clover.xml
+#      - run:
+#          name: Running PHP Unit
+#          command: |
+#              phpdbg -qrr vendor/bin/phpunit --coverage-clover ./coverage/phpunit/clover.xml
       - store_test_results:
           path: /tmp/test-results/phpunit/
       - store_artifacts:
