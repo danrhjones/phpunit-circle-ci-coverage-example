@@ -12,6 +12,8 @@ jobs:
   done:
     machine:
       image: ubuntu-1604:202007-01
+      environment:
+        COVERALLS_PARALLEL: true
     steps:
       - run:
           name: upload to coveralls
