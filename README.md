@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/danrhjones/phpunit-circle-ci-coverage-example/badge.svg?branch=main)](https://coveralls.io/github/danrhjones/phpunit-circle-ci-coverage-example?branch=main)
+
 # phpUnit Testing on CircleCI with Code Coverage
 
 > An example repo to get started with phpUnit on a CircleCI server
