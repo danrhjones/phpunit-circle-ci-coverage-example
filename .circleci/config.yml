@@ -84,6 +84,9 @@ jobs:
             - ~/.cache
             - ~/.composer/cache
       - run:
+          name: Install dependencies
+          command: npm ci
+      - run:
           name: Running PHP Unit
           command: |
            composer test:coverage
