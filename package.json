@@ -11,7 +11,7 @@
     "jest-junit": "^13.0.0"
   },
   "scripts": {
-    "test": "jest --ci --reporters=jest-junit --collectCoverage=true --coverageDirectory=coverage/jest"
+    "test": "jest --ci --reporters=jest-junit --collectCoverage=true --coverageDirectory=coverage/jest --passWithNoTests"
   },
   "repository": {
     "type": "git",
