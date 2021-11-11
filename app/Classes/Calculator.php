@@ -71,4 +71,12 @@ class Calculator
     {
         return "donkey";
     }
+    public function chicken()
+    {
+        return "chicken";
+    }
+    public function goat()
+    {
+        return "goat";
+    }
 }
