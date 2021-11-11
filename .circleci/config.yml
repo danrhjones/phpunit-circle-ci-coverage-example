@@ -3,13 +3,54 @@ version: 2.1
 workflows:
   test:
     jobs:
-      - unit-tests
-
+      - php-tests
+#      - jest
+#      - done:
+#          requires: [php-tests, jest]
 
 jobs:
-  unit-tests:
+  done:
     docker:
       - image: circleci/php:7.4-browsers
+    steps:
+      - checkout
+      - run:
+          name: Install composer dependencies
+          command: composer install -o -n
+      - run:
+          name: upload to coveralls
+          command: vendor/bin/php-coveralls -v  --exclude-no-stmt
+
+
+  jest:
+    machine:
+      image: ubuntu-1604:202007-01
+    environment:
+      COVERALLS_PARALLEL: true
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore node modules cache
+          key: node_modules-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: npm ci
+      - save_cache:
+          name: Save dependancies cache
+          key: cache-{{ checksum "package.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run:
+          name: Run Jest tests
+          command: |
+            npm run test
+
+  php-tests:
+    docker:
+      - image: circleci/php:7.4-browsers
+    environment:
+      COVERALLS_PARALLEL: true
     steps:
       - checkout
       - run:
@@ -43,9 +84,16 @@ jobs:
             - ~/.cache
             - ~/.composer/cache
       - run:
+          name: Install dependencies
+          command: npm ci
+      - run:
           name: Running PHP Unit
           command: |
            composer test:coverage
+      - run:
+          name: Run Jest tests
+          command: |
+            npm run test
       - store_test_results:
           path: /tmp/test-results/phpunit/
       - store_artifacts:
@@ -56,4 +104,3 @@ jobs:
       - run:
           name: upload to coveralls
           command: vendor/bin/php-coveralls -v  --exclude-no-stmt
-

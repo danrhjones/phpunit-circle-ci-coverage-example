@@ -1,0 +1,29 @@
+{
+  "name": "phpunit-circle-ci-coverage-example",
+  "version": "1.0.0",
+  "description": "> An example repo to get started with phpUnit on a CircleCI server",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "jest-junit": "^13.0.0"
+  },
+  "scripts": {
+    "test": "jest --ci --reporters=jest-junit --collectCoverage=true --coverageDirectory=coverage/jest --passWithNoTests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danrhjones/phpunit-circle-ci-coverage-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danrhjones/phpunit-circle-ci-coverage-example/issues"
+  },
+  "homepage": "https://github.com/danrhjones/phpunit-circle-ci-coverage-example#readme",
+  "dependencies": {
+
+  }
+}
