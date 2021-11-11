@@ -4,9 +4,9 @@ workflows:
   test:
     jobs:
       - php-tests
-      - jest
-      - done:
-          requires: [php-tests, jest]
+#      - jest
+#      - done:
+#          requires: [php-tests, jest]
 
 jobs:
   done:
@@ -87,6 +87,10 @@ jobs:
           name: Running PHP Unit
           command: |
            composer test:coverage
+      - run:
+          name: Run Jest tests
+          command: |
+            npm run test
       - store_test_results:
           path: /tmp/test-results/phpunit/
       - store_artifacts:
@@ -94,4 +98,6 @@ jobs:
           destination: test-results
       - store_artifacts:
           path: coverage/phpunit
-
+      - run:
+          name: upload to coveralls
+          command: vendor/bin/php-coveralls -v  --exclude-no-stmt
